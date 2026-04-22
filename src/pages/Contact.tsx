@@ -20,9 +20,9 @@ const Contact: FC = () => {
                 <Mail size={24} />
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-1 text-lg">البريد الإلكتروني</h3>
+                <h3 className="font-bold text-slate-900 mb-1 text-lg">راسلنا عبر البريد</h3>
                 <p className="text-slate-500 mb-2 text-sm">للرد خلال 24 ساعة</p>
-                <a href="mailto:hello@alhan.com" className="text-primary-600 font-medium">hello@alhan.com</a>
+                <a href="mailto:him.music@hotmail.com" className="text-primary-600 font-medium">him.music@hotmail.com</a>
               </div>
             </div>
 
@@ -31,9 +31,9 @@ const Contact: FC = () => {
                 <Phone size={24} />
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-1 text-lg">رقم الهاتف</h3>
+                <h3 className="font-bold text-slate-900 mb-1 text-lg">اتصل بنا</h3>
                 <p className="text-slate-500 mb-2 text-sm">من الأحد للخميس (9ص - 5م)</p>
-                <a href="tel:+966501234567" className="text-secondary-600 font-medium hover:underline" dir="ltr">+966 50 123 4567</a>
+                <a href="tel:+966500010299" className="text-secondary-600 font-medium hover:underline" dir="ltr">+966 500010299</a>
               </div>
             </div>
 
@@ -43,7 +43,7 @@ const Contact: FC = () => {
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 mb-1 text-lg">المقر الرئيسي</h3>
-                <p className="text-slate-600 leading-relaxed font-medium">الرياض، المملكة العربية السعودية</p>
+                <p className="text-slate-600 leading-relaxed font-medium">المنطقة الشرقية، المملكة العربية السعودية</p>
               </div>
             </div>
           </div>
