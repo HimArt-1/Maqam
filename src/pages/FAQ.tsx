@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HelpCircle, ChevronDown, ChevronUp, MessageCircleQuestion } from 'lucide-react';
 
@@ -29,7 +30,7 @@ const FAQ: FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="py-20 bg-slate-50 min-h-screen">
+    <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
            <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-indigo-100 text-indigo-800 text-sm font-bold mb-4">
@@ -87,9 +88,9 @@ const FAQ: FC = () => {
            <div className="relative z-10">
              <h3 className="text-2xl font-bold mb-4">لم تجد إجابة لسؤالك؟</h3>
              <p className="text-slate-400 max-w-lg mx-auto mb-6">نحن هنا للمساعدة. فريق منصة مقام الفني والأكاديمي متواجد للرد على استفساراتكم التقنية والموسيقية في أي وقت.</p>
-             <button className="bg-primary-600 hover:bg-primary-500 transition px-8 py-3 rounded-full font-bold text-white shadow-lg">
+             <Link to="/contact" className="inline-block bg-primary-600 hover:bg-primary-500 transition px-8 py-3 rounded-full font-bold text-white shadow-lg">
                 تواصل معنا الآن
-             </button>
+             </Link>
            </div>
         </div>
       </div>
