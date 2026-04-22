@@ -48,7 +48,7 @@ const benefitsList = [
 
 const Benefits: FC = () => {
   return (
-    <div className="py-20 bg-slate-50 min-h-screen">
+    <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16 max-w-3xl mx-auto">
           <span className="inline-block py-1.5 px-6 rounded-full bg-emerald-100 text-emerald-800 text-sm font-bold mb-4">

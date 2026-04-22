@@ -36,7 +36,17 @@ export default {
       },
       fontFamily: {
         sans: ['Tajawal', 'sans-serif'],
-      }
+      },
+      keyframes: {
+        blob: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '33%': { transform: 'translate(8%, -6%) scale(1.04)' },
+          '66%': { transform: 'translate(-6%, 4%) scale(0.98)' },
+        },
+      },
+      animation: {
+        blob: 'blob 8s ease-in-out infinite',
+      },
     },
   },
   plugins: [

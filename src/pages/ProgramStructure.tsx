@@ -43,7 +43,7 @@ const programSteps = [
 
 const ProgramStructure: FC = () => {
   return (
-    <div className="py-20 bg-slate-50 min-h-screen">
+    <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 max-w-5xl">
         
         <div className="text-center mb-20">
@@ -66,14 +66,14 @@ const ProgramStructure: FC = () => {
           </div>
         </div>
 
-        <div className="mb-20 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div className="card-modern mb-20 p-8">
           <h2 className="mb-2 text-center text-2xl font-extrabold text-slate-900">الوحدات التعليمية في المسار التفاعلي</h2>
           <p className="mx-auto mb-8 max-w-2xl text-center text-slate-600 leading-relaxed">
             كل وحدة تضم عدة دروس؛ داخل كل درس ستجد شرحاً مبسّطاً، أهدافاً واضحة، تلميحات للخطوات، وروابط لمراجعة نظرية من المكتبة عند الحاجة.
           </p>
           <div className="grid gap-4 md:grid-cols-2">
             {curriculumUnitsMeta.map((u) => (
-              <div key={u.index} className="rounded-2xl border border-slate-100 bg-slate-50/80 p-5 text-right">
+              <div key={u.index} className="rounded-2xl border border-white/60 bg-white/60 p-5 text-right shadow-sm backdrop-blur-sm">
                 <p className="text-xs font-bold text-primary-600">الوحدة {u.index}</p>
                 <h3 className="mt-1 font-bold text-slate-900">{u.title.replace(/^[^:]+:\s*/, '')}</h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">{u.summary}</p>
@@ -93,7 +93,7 @@ const ProgramStructure: FC = () => {
                 <div key={idx} className={`flex flex-col md:flex-row items-center gap-8 ${isEven ? '' : 'md:flex-row-reverse'}`}>
                   
                   {/* Content Box */}
-                  <div className={`flex-1 w-full bg-white p-8 rounded-3xl shadow-lg border border-slate-100 relative ${isEven ? 'md:text-right' : 'md:text-left'}`}>
+                  <div className={`relative w-full flex-1 rounded-3xl border border-white/70 bg-white/80 p-8 shadow-lg backdrop-blur-md ${isEven ? 'md:text-right' : 'md:text-left'}`}>
                      <div className={`md:hidden w-16 h-16 rounded-2xl bg-gradient-to-br ${step.color} shadow-lg mb-6 flex items-center justify-center text-white`}>
                         <step.icon size={28} />
                      </div>

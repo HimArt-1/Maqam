@@ -3,8 +3,62 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply antialiased;
+  }
   body {
-    @apply font-sans bg-slate-50 text-slate-900;
+    @apply font-sans text-slate-900 min-h-screen;
+    background-color: #e8f0eb;
+    background-image:
+      radial-gradient(ellipse 100% 70% at 50% -35%, rgba(52, 109, 70, 0.14), transparent 55%),
+      radial-gradient(ellipse 80% 55% at 105% 15%, rgba(161, 108, 44, 0.1), transparent 52%),
+      radial-gradient(ellipse 65% 45% at -8% 55%, rgba(70, 139, 93, 0.08), transparent 48%),
+      linear-gradient(180deg, #eef5f0 0%, #e5ede8 45%, #eef2ef 100%);
+  }
+}
+
+@layer utilities {
+  /** خلفية موحّدة للصفحات عند الحاجة فوق body */
+  .bg-app {
+    background-color: transparent;
+  }
+
+  /** بطاقة عصرية — زجاج خفيف وظل ملون */
+  .card-modern {
+    @apply rounded-[1.75rem] border border-white/70 bg-white/75 backdrop-blur-xl;
+    box-shadow:
+      0 4px 24px -6px rgba(27, 54, 38, 0.1),
+      0 12px 40px -12px rgba(27, 54, 38, 0.08),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
+  }
+
+  .card-modern-hover {
+    @apply card-modern transition-all duration-300 ease-out;
+  }
+  .card-modern-hover:hover {
+    box-shadow:
+      0 8px 32px -8px rgba(27, 54, 38, 0.14),
+      0 20px 50px -16px rgba(52, 109, 70, 0.12),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+    border-color: rgba(154, 200, 169, 0.65);
+    transform: translateY(-2px);
+  }
+
+  /** شريط علوي ناعم للأقسام */
+  .section-fade {
+    background: linear-gradient(
+      180deg,
+      rgba(238, 245, 240, 0.65) 0%,
+      rgba(232, 240, 235, 0.35) 50%,
+      transparent 100%
+    );
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
   }
 }
 

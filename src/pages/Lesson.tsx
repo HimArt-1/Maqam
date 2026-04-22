@@ -133,7 +133,7 @@ const Lesson: FC = () => {
   const progressPercent = ((currentStepIndex) / lesson.steps.length) * 100;
 
   return (
-    <div className={`py-10 min-h-screen transition-colors ${isFocusMode ? 'bg-white' : 'bg-slate-50'}`}>
+    <div className={`min-h-screen py-10 transition-colors ${isFocusMode ? 'bg-white' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 max-w-5xl">
         <button 
           onClick={() => navigate('/activities')} 
@@ -143,7 +143,7 @@ const Lesson: FC = () => {
         </button>
 
         {!isCompleted ? (
-          <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm mb-10 overflow-hidden relative">
+          <div className="card-modern relative mb-10 overflow-hidden p-8">
             {/* Progress Bar */}
             <div className={`absolute top-0 left-0 right-0 h-2 w-full ${isFocusMode ? 'bg-slate-50' : 'bg-slate-100'}`}>
               <motion.div 

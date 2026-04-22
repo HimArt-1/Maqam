@@ -3,7 +3,7 @@ import { Target, Heart, Lightbulb, Music } from 'lucide-react';
 
 const About: FC = () => {
   return (
-    <div className="py-20 bg-white min-h-screen leading-loose">
+    <div className="min-h-screen py-20 leading-loose">
       <div className="container mx-auto px-4 max-w-5xl">
         
         {/* Intro */}

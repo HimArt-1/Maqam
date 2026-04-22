@@ -19,7 +19,7 @@ const Header: FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
+    <header className="sticky top-0 z-50 border-b border-white/50 bg-white/70 shadow-[0_8px_32px_-12px_rgba(27,54,38,0.08)] backdrop-blur-xl transition-all duration-300">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           

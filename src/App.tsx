@@ -10,18 +10,15 @@ import Studio from './pages/Studio';
 import Lesson from './pages/Lesson';
 import Activities from './pages/Activities';
 import Resources from './pages/Resources';
-import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
 import AccessibilityPanel from './components/AccessibilityPanel';
-import WelcomePopup from './components/WelcomePopup';
 import { AccessibilityProvider } from './context/AccessibilityContext';
 
 const App: FC = () => {
   return (
     <AccessibilityProvider>
       <Router>
-        <div className="flex flex-col min-h-screen bg-slate-50 font-sans text-slate-800 transition-colors" dir="rtl">
-          <WelcomePopup />
+        <div className="flex min-h-screen flex-col bg-app font-sans text-slate-800 transition-colors" dir="rtl">
           <Header />
         <main className="flex-grow">
           <Routes>

@@ -30,7 +30,7 @@ const Resources: FC = () => {
   const activeContent = musicTheoryData.find(item => item.id === activeTabId);
 
   return (
-    <div className="py-12 bg-slate-50 min-h-screen">
+    <div className="min-h-screen py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         
         {/* Header */}
@@ -72,8 +72,8 @@ const Resources: FC = () => {
                   onClick={() => selectTab(section.id)}
                   className={`flex items-start gap-4 p-5 rounded-2xl text-right transition-all border-2 ${
                     isActive 
-                      ? 'bg-white border-primary-500 shadow-xl shadow-primary-500/10 scale-[1.02]' 
-                      : 'bg-white/50 border-transparent hover:border-slate-200 hover:bg-white text-slate-600'
+                      ? 'scale-[1.02] border-primary-500 bg-white/90 shadow-xl shadow-primary-500/15 backdrop-blur-md' 
+                      : 'border-transparent bg-white/45 text-slate-600 backdrop-blur-sm hover:border-slate-200/80 hover:bg-white/75'
                   }`}
                 >
                   <div className={`p-3 rounded-xl ${isActive ? 'bg-primary-100 text-primary-600' : 'bg-slate-100 text-slate-500'}`}>
@@ -93,7 +93,7 @@ const Resources: FC = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="w-full lg:w-2/3 bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-200 lg:min-h-[600px]">
+          <div className="card-modern w-full p-8 md:p-12 lg:min-h-[600px] lg:w-2/3">
              <AnimatePresence mode="wait">
                {activeContent && (
                   <motion.div

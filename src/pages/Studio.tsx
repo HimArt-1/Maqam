@@ -116,7 +116,9 @@ const Studio: FC = () => {
   }, [currentNote]);
 
   return (
-    <div className={`py-12 min-h-screen transition-colors ${isFocusMode ? 'bg-white' : 'bg-slate-100'}`}>
+    <div
+      className={`min-h-screen py-12 transition-colors ${isFocusMode ? 'bg-white' : 'bg-transparent'}`}
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         <div className={`flex flex-col md:flex-row justify-between items-center mb-10 gap-4 transition-opacity ${isFocusMode ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
           <div>

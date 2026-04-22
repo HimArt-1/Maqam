@@ -3,7 +3,7 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 const Contact: FC = () => {
   return (
-    <div className="py-20 bg-slate-50 relative overflow-hidden">
+    <div className="relative overflow-hidden py-20">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900">تواصل معنا</h1>
@@ -15,7 +15,7 @@ const Contact: FC = () => {
         <div className="flex flex-col lg:flex-row gap-12 max-w-5xl mx-auto">
           {/* Contact Info */}
           <div className="w-full lg:w-1/3 space-y-8">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition">
+            <div className="card-modern flex items-start gap-4 p-8 transition hover:border-primary-100/80">
               <div className="bg-primary-50 p-3 rounded-2xl text-primary-600">
                 <Mail size={24} />
               </div>
@@ -26,7 +26,7 @@ const Contact: FC = () => {
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition">
+            <div className="card-modern flex items-start gap-4 p-8 transition hover:border-primary-100/80">
               <div className="bg-secondary-50 p-3 rounded-2xl text-secondary-600">
                 <Phone size={24} />
               </div>
@@ -37,7 +37,7 @@ const Contact: FC = () => {
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex items-start gap-4 hover:shadow-md transition">
+            <div className="card-modern flex items-start gap-4 p-8 transition hover:border-primary-100/80">
               <div className="bg-teal-50 p-3 rounded-2xl text-teal-600">
                 <MapPin size={24} />
               </div>
@@ -49,7 +49,7 @@ const Contact: FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="w-full lg:w-2/3 bg-white p-10 rounded-3xl shadow-xl border border-slate-100">
+          <div className="card-modern w-full p-10 lg:w-2/3">
             <h2 className="text-2xl font-bold mb-8 text-slate-900">أرسل رسالتك</h2>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

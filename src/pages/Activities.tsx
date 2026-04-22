@@ -50,7 +50,7 @@ const Activities: FC = () => {
   };
 
   return (
-    <div className="py-20 bg-slate-50 min-h-screen">
+    <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Header Section */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
@@ -65,10 +65,7 @@ const Activities: FC = () => {
 
         <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {curriculumUnitsMeta.map((u) => (
-            <div
-              key={u.index}
-              className="rounded-2xl border border-slate-200 bg-white p-5 text-right shadow-sm"
-            >
+            <div key={u.index} className="card-modern p-5 text-right">
               <p className="text-xs font-bold text-primary-600">الوحدة {u.index}</p>
               <h3 className="mt-1 font-bold text-slate-900 leading-snug">{u.title.replace(/^[^:]+:\s*/, '')}</h3>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">{u.summary}</p>
@@ -76,7 +73,7 @@ const Activities: FC = () => {
           ))}
         </div>
 
-        <div id="progress" className="mb-12 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
+        <div id="progress" className="card-modern mb-12 p-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-4 text-right">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary-50 text-primary-600">
@@ -126,7 +123,7 @@ const Activities: FC = () => {
         <div id="lessons" className="space-y-14">
           {lessonsByUnit.map((group) => (
             <section key={group.unitTitle} className="space-y-4">
-              <div className="rounded-2xl border border-primary-100 bg-primary-50/40 px-6 py-4 text-right">
+              <div className="rounded-2xl border border-primary-200/50 bg-primary-50/50 px-6 py-4 text-right shadow-sm backdrop-blur-sm">
                 <h2 className="text-lg font-extrabold text-primary-900 md:text-xl">{group.unitTitle}</h2>
                 <p className="mt-1 text-sm text-slate-600">
                   {curriculumUnitsMeta.find((m) => m.index === group.unitIndex)?.summary}
@@ -139,7 +136,11 @@ const Activities: FC = () => {
                   return (
                     <div
                       key={lesson.id}
-                      className={`bg-white rounded-[2rem] p-8 md:p-10 border shadow-sm hover:shadow-xl transition-all group flex flex-col md:flex-row items-center gap-8 ${isDone ? 'border-emerald-200' : 'border-slate-200 hover:border-primary-200'}`}
+                      className={`group flex flex-col items-center gap-8 rounded-[2rem] border p-8 shadow-sm backdrop-blur-sm transition-all hover:shadow-xl md:flex-row md:p-10 ${
+                        isDone
+                          ? 'border-emerald-200/80 bg-white/85'
+                          : 'border-white/70 bg-white/75 hover:border-primary-200/60'
+                      }`}
                     >
                       <div
                         className={`w-20 h-20 shrink-0 rounded-2xl flex items-center justify-center font-bold text-3xl shadow-inner border ${isDone ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-primary-50 text-primary-600 border-primary-100'}`}
