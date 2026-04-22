@@ -27,10 +27,10 @@ const Home: FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="inline-flex flex-col items-center justify-center py-3 px-8 md:px-10 rounded-[2rem] bg-gradient-to-b from-white to-slate-50/80 backdrop-blur-sm border-2 border-primary-100 shadow-xl shadow-primary-900/5 text-center mb-10 relative z-20"
           >
-            <span className="text-xl md:text-2xl text-primary-700 font-extrabold tracking-wide drop-shadow-sm flex items-center gap-2">
-              <Star size={20} className="text-amber-500 fill-amber-500" />
+            <span className="flex items-center gap-2 text-lg font-extrabold tracking-wide drop-shadow-sm md:text-xl text-primary-800">
+              <Star size={18} className="fill-amber-500 text-amber-500" />
               مبادرة تعليمية ـ تطوير: هيثم الزهراني
-              <Star size={20} className="text-amber-500 fill-amber-500" />
+              <Star size={18} className="fill-amber-500 text-amber-500" />
             </span>
           </motion.div>
 

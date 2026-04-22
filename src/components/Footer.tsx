@@ -23,7 +23,7 @@ const Footer: FC = () => {
               </h1>
             </Link>
             <p className="text-slate-400 leading-relaxed mb-6 w-5/6">
-              منصة سعودية متكاملة تهدف إلى نشر ثقافة الإبداع الموسيقي والارتقاء بمهارات المبتدئين والمتعلمين عبر أسس منهجية حديثة وممتعة.
+              منصة تعليمية موسيقية متكاملة تهدف إلى نشر ثقافة الإبداع الموسيقي والارتقاء بمهارات المبتدئين والمتعلمين عبر أسس منهجية حديثة وممتعة.
             </p>
             <div className="flex gap-4">
               <a href="#" className="bg-white/5 hover:bg-primary-500 hover:text-white p-2.5 rounded-lg text-slate-300 transition-colors">

@@ -11,6 +11,7 @@ import Lesson from './pages/Lesson';
 import Activities from './pages/Activities';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
+import FAQ from './pages/FAQ';
 import AccessibilityPanel from './components/AccessibilityPanel';
 import { AccessibilityProvider } from './context/AccessibilityContext';
 
