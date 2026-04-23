@@ -53,12 +53,12 @@ const Activities: FC = () => {
     <div className="min-h-screen py-20">
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Header Section */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="inline-block py-1 px-4 rounded-full bg-secondary-100 text-secondary-800 text-sm font-bold mb-4">
+        <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto px-2">
+          <span className="inline-block py-1.5 px-5 rounded-full bg-secondary-100 text-secondary-800 text-sm font-bold mb-4">
             التدريب التفاعلي 🎧
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 leading-tight">مسار التعلم العملي</h1>
-          <p className="text-xl text-slate-600 leading-relaxed">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-slate-900 leading-tight">مسار التعلم العملي</h1>
+          <p className="text-base sm:text-xl text-slate-600 leading-relaxed">
             منهج متدرّج في ست وحدات: شرح مبسّط في كل درس، أهداف واضحة، وروابط للمرجع النظري عند الحاجة. اختر الدرس وابدأ — المنصة تصحح خطوة بخطوة.
           </p>
         </div>
@@ -136,44 +136,48 @@ const Activities: FC = () => {
                   return (
                     <div
                       key={lesson.id}
-                      className={`group flex flex-col items-center gap-8 rounded-[2rem] border p-8 shadow-sm backdrop-blur-sm transition-all hover:shadow-xl md:flex-row md:p-10 ${
+                      className={`group flex flex-col items-center gap-5 sm:gap-6 md:gap-8 rounded-2xl md:rounded-[2rem] border p-5 sm:p-6 md:p-8 lg:p-10 shadow-sm backdrop-blur-sm transition-all hover:shadow-xl ${
                         isDone
                           ? 'border-emerald-200/80 bg-white/85'
                           : 'border-white/70 bg-white/75 hover:border-primary-200/60'
-                      }`}
+                      } md:flex-row`}
                     >
                       <div
-                        className={`w-20 h-20 shrink-0 rounded-2xl flex items-center justify-center font-bold text-3xl shadow-inner border ${isDone ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-primary-50 text-primary-600 border-primary-100'}`}
+                        className={`w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-2xl flex items-center justify-center font-bold text-2xl sm:text-3xl shadow-inner border ${isDone ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-primary-50 text-primary-600 border-primary-100'}`}
                       >
-                        {isDone ? <CheckCircle2 size={40} strokeWidth={2.25} /> : idx}
+                        {isDone ? <CheckCircle2 size={32} strokeWidth={2.25} className="sm:w-10 sm:h-10" /> : idx}
                       </div>
 
                       <div className="flex-1 text-center md:text-right">
-                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-2">
-                          <h3 className="text-2xl font-bold text-slate-900">{lesson.title}</h3>
-                          <span className="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1 rounded-full">
+                        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-3 mb-2">
+                          <h3 className="text-xl sm:text-2xl font-bold text-slate-900">{lesson.title}</h3>
+                          <span className="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full">
                             المستوى {lesson.level}
                           </span>
-                          <span className="bg-slate-50 text-slate-500 text-xs font-bold px-3 py-1 rounded-full">
+                          <span className="bg-slate-50 text-slate-500 text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full">
                             {lesson.durationRange}
                           </span>
                           {isDone && (
-                            <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">
+                            <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full">
                               مكتمل
                             </span>
                           )}
                         </div>
-                        <p className="text-slate-500 leading-relaxed mb-3 md:mb-0">{lesson.description}</p>
+                        <p className="text-slate-500 leading-relaxed text-sm sm:text-base mb-4 md:mb-3">{lesson.description}</p>
                         <p className="text-sm text-slate-600 leading-relaxed hidden md:block border-t border-slate-100 pt-3 mt-3">
                           <span className="font-bold text-slate-700">باختصار: </span>
                           {lesson.inPlainWords}
                         </p>
                       </div>
 
-                      <div className="shrink-0">
+                      <div className="w-full md:w-auto shrink-0">
                         <Link
                           to={`/lesson/${lesson.id}`}
-                          className="bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 px-8 rounded-xl transition flex items-center gap-3 shadow-lg shadow-primary-600/30 group-hover:-translate-x-2"
+                          className={`w-full md:w-auto flex items-center justify-center gap-3 font-extrabold py-4 sm:py-5 px-6 sm:px-8 rounded-xl md:rounded-2xl transition-all shadow-lg text-base sm:text-lg ${
+                            isDone 
+                              ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 shadow-slate-200/50 border border-slate-200'
+                              : 'bg-gradient-to-l from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white shadow-primary-600/30 hover:-translate-y-0.5 hover:shadow-xl'
+                          }`}
                         >
                           {isDone ? 'إعادة الدرس' : 'بدء الدرس'} <ArrowLeft size={20} />
                         </Link>

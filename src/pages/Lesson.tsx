@@ -143,35 +143,56 @@ const Lesson: FC = () => {
         </button>
 
         {!isCompleted ? (
-          <div className="card-modern relative mb-10 overflow-hidden p-8">
+          <div className="card-modern relative mb-6 md:mb-10 overflow-hidden p-5 sm:p-6 md:p-8">
             {/* Progress Bar */}
-            <div className={`absolute top-0 left-0 right-0 h-2 w-full ${isFocusMode ? 'bg-slate-50' : 'bg-slate-100'}`}>
+            <div className={`absolute top-0 left-0 right-0 h-2.5 w-full ${isFocusMode ? 'bg-slate-50' : 'bg-slate-100'}`}>
               <motion.div 
-                className={`h-full ${isFocusMode ? 'bg-primary-300' : 'bg-primary-500'}`}
+                className={`h-full rounded-full ${isFocusMode ? 'bg-primary-300' : 'bg-gradient-to-l from-primary-500 to-emerald-400'}`}
                 initial={{ width: 0 }}
                 animate={{ width: `${progressPercent}%` }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
               ></motion.div>
             </div>
             
-            <div className={`flex flex-col md:flex-row md:items-start justify-between gap-6 pt-4 transition-opacity ${isFocusMode ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
-              <div className="flex-1">
-                <span className="bg-primary-100 text-primary-800 text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block">
+            {/* Lesson Info */}
+            <div className={`pt-4 transition-opacity ${isFocusMode ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <span className="bg-primary-100 text-primary-800 text-xs font-bold px-3 py-1.5 rounded-full">
                   المستوى {lesson.level}
                 </span>
-                <h1 className="text-3xl font-bold text-slate-800 mb-2">{lesson.title}</h1>
-                <p className="text-slate-500">{lesson.description}</p>
+                <span className="bg-slate-100 text-slate-600 text-xs font-bold px-3 py-1.5 rounded-full">
+                  {lesson.durationRange}
+                </span>
+                <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full">
+                  الخطوة {currentStepIndex + 1} / {lesson.steps.length}
+                </span>
               </div>
-
-              {!isAudioReady && (
-                <button onClick={startAudio} className="bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-emerald-700 transition shadow-lg shrink-0">
-                  <Volume2 size={20} /> تفعيل وبدء الدرس
-                </button>
-              )}
+              <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2">{lesson.title}</h1>
+              <p className="text-slate-500 text-base sm:text-lg leading-relaxed">{lesson.description}</p>
             </div>
 
-            <div className={`mt-8 space-y-4 text-right transition-opacity ${isFocusMode ? 'opacity-25 hover:opacity-100' : ''}`}>
+            {/* Activate Lesson Button — Full-width prominent block */}
+            {!isAudioReady && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="mt-6 md:mt-8"
+              >
+                <button 
+                  onClick={startAudio} 
+                  className="relative w-full bg-gradient-to-l from-emerald-500 via-emerald-600 to-teal-600 text-white px-6 py-5 sm:py-6 rounded-2xl font-extrabold flex items-center justify-center gap-3 sm:gap-4 shadow-[0_12px_40px_-8px_rgba(16,185,129,0.6)] border-2 border-emerald-300/40 text-lg sm:text-xl md:text-2xl transition-all hover:-translate-y-1 hover:shadow-[0_18px_50px_-8px_rgba(16,185,129,0.8)] active:translate-y-0 active:scale-[0.98]"
+                >
+                  <span className="absolute inset-0 rounded-2xl border-4 border-emerald-400/50 animate-ping" style={{ animationDuration: '2s' }}></span>
+                  <Volume2 size={28} className="animate-pulse drop-shadow-lg text-emerald-100 sm:w-8 sm:h-8" />
+                  <span className="drop-shadow-md tracking-wide">تفعيل وبدء الدرس</span>
+                </button>
+                <p className="text-center text-sm text-slate-400 mt-3 font-medium">اضغط لتفعيل الصوت والبدء في التمرين التفاعلي</p>
+              </motion.div>
+            )}
+
+            <div className={`mt-6 md:mt-8 space-y-3 md:space-y-4 text-right transition-opacity ${isFocusMode ? 'opacity-25 hover:opacity-100' : ''}`}>
               <p className="text-xs font-bold uppercase tracking-wide text-slate-400">
-                الوحدة: {lesson.unitTitle} · مدة مقترحة: {lesson.durationRange}
+                الوحدة: {lesson.unitTitle}
               </p>
               <div className="rounded-2xl border border-slate-100 bg-slate-50/90 p-5 md:p-6">
                 <div className="mb-2 flex items-center gap-2 font-bold text-slate-800">
@@ -222,27 +243,27 @@ const Lesson: FC = () => {
             </div>
 
             {/* Instruction Card */}
-            <div className={`mt-12 rounded-2xl p-8 text-center text-white border-4 transition-all ${isFocusMode ? 'bg-slate-800 border-slate-700 shadow-2xl scale-[1.02]' : 'bg-slate-900 border-slate-800'}`}>
-              <div className="text-primary-400 font-bold text-sm tracking-wider uppercase mb-2">تعليمات الخطوة الحالية</div>
+            <div className={`mt-8 md:mt-12 rounded-2xl md:rounded-3xl p-5 sm:p-6 md:p-8 text-center text-white border-2 md:border-4 transition-all ${isFocusMode ? 'bg-slate-800 border-slate-700 shadow-2xl scale-[1.02]' : 'bg-gradient-to-b from-slate-900 to-slate-950 border-slate-700/80 shadow-2xl shadow-slate-900/40'}`}>
+              <div className="text-primary-400 font-bold text-xs sm:text-sm tracking-wider uppercase mb-3">تعليمات الخطوة الحالية</div>
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={currentStepIndex}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="text-2xl font-bold leading-relaxed mb-6"
+                  className="text-xl sm:text-2xl md:text-3xl font-bold leading-relaxed mb-4 sm:mb-6"
                 >
                   {currentStep.instruction}
                 </motion.div>
               </AnimatePresence>
               {currentStep.hint && (
-                <p className="mt-4 max-w-2xl mx-auto text-base font-medium leading-relaxed text-primary-200/95">
+                <p className="mt-3 max-w-2xl mx-auto text-sm sm:text-base font-medium leading-relaxed text-primary-200/95 bg-white/5 rounded-xl px-4 py-3">
                   تلميح: {currentStep.hint}
                 </p>
               )}
               
-              <div className="flex justify-center flex-wrap gap-2">
-                <span className="bg-white/10 text-white border border-white/20 px-8 py-3 rounded-xl font-mono text-xl tracking-widest">
+              <div className="flex justify-center flex-wrap gap-2 mt-4 sm:mt-6">
+                <span className="bg-white/10 text-white border border-white/20 px-5 sm:px-8 py-2.5 sm:py-3 rounded-xl font-mono text-lg sm:text-xl tracking-widest">
                   النوتة المطلوبة: <span className="text-primary-400 font-bold">{currentStep.targetNote}</span>
                 </span>
               </div>
@@ -252,13 +273,13 @@ const Lesson: FC = () => {
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="bg-emerald-50 rounded-3xl p-16 border border-emerald-100 text-center mb-10 shadow-lg"
+            className="bg-gradient-to-br from-emerald-50 to-teal-50/50 rounded-2xl md:rounded-3xl p-8 sm:p-10 md:p-16 border border-emerald-200/80 text-center mb-6 md:mb-10 shadow-lg"
           >
-            <div className="w-24 h-24 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 text-white shadow-xl shadow-emerald-500/30">
-              <Sparkles size={40} />
+            <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 text-white shadow-xl shadow-emerald-500/30">
+              <Sparkles size={36} className="sm:w-10 sm:h-10" />
             </div>
-            <h2 className="text-4xl font-bold text-emerald-900 mb-4">عمل رائع جداً!</h2>
-            <p className="text-lg text-emerald-700 max-w-xl mx-auto mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 mb-3 sm:mb-4">عمل رائع جداً!</h2>
+            <p className="text-base sm:text-lg text-emerald-700 max-w-xl mx-auto mb-3 sm:mb-4">
               لقد أتممت بنجاح تمرين "{lesson.title}". استمر في هذا الأداء المبهر.
             </p>
             {lesson.takeaway && (

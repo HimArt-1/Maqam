@@ -120,37 +120,38 @@ const Studio: FC = () => {
       className={`min-h-screen py-12 transition-colors ${isFocusMode ? 'bg-white' : 'bg-transparent'}`}
     >
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className={`flex flex-col md:flex-row justify-between items-center mb-10 gap-4 transition-opacity ${isFocusMode ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
+        <div className={`flex flex-col gap-4 sm:gap-6 mb-8 md:mb-10 transition-opacity ${isFocusMode ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
           <div>
-            <h1 className="text-3xl font-bold text-slate-900 flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-3">
               <AudioLines className="text-primary-600" />
               استوديو العزف المتقدم
             </h1>
-            <p className="text-slate-600 mt-2">تدرب على الإيقاع والأنغام، العب باستخدام كيبورد الكمبيوتر أو جهاز MIDI الخارجي.</p>
+            <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">تدرب على الإيقاع والأنغام، العب باستخدام كيبورد الكمبيوتر أو جهاز MIDI الخارجي.</p>
           </div>
 
-          <div className="flex gap-4">
-            <div className={`px-4 py-2 rounded-xl flex items-center gap-2 border font-bold ${inputs.length > 0 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-200 text-slate-500 border-slate-300'}`}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <div className={`px-4 py-2.5 rounded-xl flex items-center justify-center gap-2 border font-bold text-sm sm:text-base ${inputs.length > 0 ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-200 text-slate-500 border-slate-300'}`}>
               <Activity size={18} />
               {inputs.length > 0 ? `متصل (${inputs.length} أجهزة MIDI)` : 'لا يوجد جهاز MIDI'}
             </div>
             {!isAudioReady && !isLoadingInstrument && (
               <button 
                 onClick={startAudio}
-                className="bg-primary-600 text-white px-6 py-2 rounded-xl hover:bg-primary-700 transition font-bold flex items-center gap-2 shadow-lg shadow-primary-600/30 animate-pulse"
+                className="relative bg-gradient-to-l from-primary-600 to-primary-700 text-white px-6 py-3.5 sm:px-8 sm:py-4 w-full sm:w-auto rounded-2xl font-extrabold flex items-center justify-center gap-3 shadow-[0_10px_30px_-10px_rgba(20,184,166,0.6)] border-2 border-primary-400/50 text-base sm:text-lg transition-all hover:-translate-y-1 hover:shadow-[0_15px_40px_-10px_rgba(20,184,166,0.8)] active:translate-y-0 active:scale-95"
               >
-                <Volume2 size={20} />
-                تفعيل البيانو
+                <span className="absolute inset-0 rounded-2xl border-2 border-primary-400/60 animate-ping" style={{ animationDuration: '2.5s' }}></span>
+                <Volume2 size={24} className="animate-pulse drop-shadow-md text-primary-50" />
+                <span className="drop-shadow-md tracking-wide">تفعيل البيانو</span>
               </button>
             )}
             {isLoadingInstrument && (
-              <div className="bg-amber-50 text-amber-700 px-6 py-2 rounded-xl border border-amber-200 font-bold flex items-center gap-2">
+              <div className="bg-amber-50 text-amber-700 px-6 py-3 rounded-xl border border-amber-200 font-bold flex items-center justify-center gap-2 text-sm sm:text-base">
                 <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
                 جاري تحميل الآلة...
               </div>
             )}
             {isAudioReady && (
-              <div className="bg-primary-50 text-primary-700 px-6 py-2 rounded-xl border border-primary-200 font-bold flex items-center gap-2">
+              <div className="bg-primary-50 text-primary-700 px-6 py-3 rounded-xl border border-primary-200 font-bold flex items-center justify-center gap-2 text-sm sm:text-base">
                 <Volume2 size={20} />
                 البيانو مفعل
               </div>
