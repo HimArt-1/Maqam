@@ -22,16 +22,28 @@ const Home: FC = () => {
           className="relative z-10 max-w-4xl mx-auto text-center"
         >
           <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-flex flex-col items-center justify-center py-3 px-8 md:px-10 rounded-[2rem] bg-gradient-to-b from-white to-slate-50/80 backdrop-blur-sm border-2 border-primary-100 shadow-xl shadow-primary-900/5 text-center mb-10 relative z-20"
+            initial={{ opacity: 0, y: -20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
+            className="relative inline-flex flex-col items-center justify-center py-4 px-8 md:py-5 md:px-12 rounded-[2rem] bg-gradient-to-br from-white/95 via-amber-50/40 to-white/90 backdrop-blur-xl border border-amber-200/60 shadow-[0_8px_40px_-8px_rgba(245,158,11,0.25),0_2px_12px_-2px_rgba(0,0,0,0.08)] text-center mb-10 relative z-20 overflow-hidden group"
           >
-            <span className="flex items-center gap-2 text-lg font-extrabold tracking-wide drop-shadow-sm md:text-xl text-primary-800">
-              <Star size={18} className="fill-amber-500 text-amber-500" />
-              مبادرة تعليمية ـ تطوير: هيثم الزهراني
-              <Star size={18} className="fill-amber-500 text-amber-500" />
+            {/* Shimmer sweep effect */}
+            <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[1.5s] ease-in-out bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12 pointer-events-none" />
+            
+            {/* Top decorative line */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-[3px] rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 opacity-80" />
+
+            <span className="flex items-center gap-2.5 text-base sm:text-lg md:text-xl font-extrabold tracking-wide text-amber-700 mb-1">
+              <Star size={16} className="fill-amber-500 text-amber-500 drop-shadow-[0_1px_3px_rgba(245,158,11,0.5)]" />
+              مبادرة تعليمية
+              <Star size={16} className="fill-amber-500 text-amber-500 drop-shadow-[0_1px_3px_rgba(245,158,11,0.5)]" />
             </span>
+            <span className="text-sm sm:text-base md:text-lg font-bold text-primary-800/90 tracking-wide">
+              تطوير وتنفيذ: <span className="bg-gradient-to-l from-primary-700 to-primary-900 bg-clip-text text-transparent font-extrabold">هيثم الزهراني</span>
+            </span>
+
+            {/* Bottom decorative line */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-[2px] rounded-full bg-gradient-to-r from-primary-400 via-primary-500 to-primary-400 opacity-60" />
           </motion.div>
 
           <motion.div
