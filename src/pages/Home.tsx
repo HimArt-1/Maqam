@@ -10,9 +10,9 @@ const Home: FC = () => {
       {/* Hero Section */}
       <section className="relative px-4 pt-20 pb-28 md:pt-32 md:pb-40 container mx-auto">
         <div className="pointer-events-none absolute top-1/2 left-1/2 h-[620px] w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 opacity-40">
-          <div className="absolute top-0 right-10 h-80 w-80 rounded-full bg-primary-400/90 blur-3xl animate-blob" />
+          <div className="absolute top-0 right-10 h-80 w-80 rounded-full bg-primary-300/80 blur-3xl animate-blob" />
           <div className="animation-delay-2000 absolute top-10 left-0 h-72 w-72 rounded-full bg-secondary-300/80 blur-3xl animate-blob" />
-          <div className="animation-delay-4000 absolute -bottom-12 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-teal-300/70 blur-3xl animate-blob" />
+          <div className="animation-delay-4000 absolute -bottom-12 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-200/70 blur-3xl animate-blob" />
         </div>
 
         <motion.div 
@@ -52,24 +52,30 @@ const Home: FC = () => {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             className="relative flex justify-center items-center w-full mb-12"
           >
-            {/* Glowing background effect around the logo */}
-            <div className="absolute inset-0 bg-primary-400 blur-[100px] opacity-25 rounded-full animate-pulse w-3/4 h-3/4 m-auto"></div>
-            <img 
-              src="/logo.png" 
-              alt="الشعار الكامل لمنصة مقام" 
-              className="relative z-10 w-80 md:w-[28rem] lg:w-[36rem] h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.25)] object-contain" 
-            />
+            {/* Glowing background effect around the playful logo */}
+            <div className="absolute inset-0 bg-secondary-300 blur-[80px] opacity-30 rounded-full animate-pulse w-64 h-64 m-auto"></div>
+            
+            {/* Playful CSS Logo */}
+            <div className="relative z-10 w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-tr from-primary-400 to-secondary-300 flex items-center justify-center shadow-[0_15px_35px_rgba(14,165,233,0.3)] border-8 border-white/80 overflow-hidden group">
+              <div className="absolute top-4 right-6 animate-bounce" style={{ animationDuration: '3s' }}>
+                <Star size={24} className="text-white opacity-80 fill-white" />
+              </div>
+              <div className="absolute bottom-6 left-6 animate-bounce" style={{ animationDuration: '4s' }}>
+                <Music size={28} className="text-white opacity-80" />
+              </div>
+              <Music size={80} className="text-white transform group-hover:scale-110 transition duration-500 drop-shadow-lg" strokeWidth={2.5} />
+            </div>
           </motion.div>
 
-          <h1 className="mb-8 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 md:text-6xl">
-            رحلتك نحو <br className="md:hidden" />
-            <span className="inline-block bg-gradient-to-l from-primary-700 via-primary-600 to-secondary-600 bg-clip-text pb-1 leading-relaxed text-transparent">
-              الإبداع الموسيقي
+          <h1 className="mb-6 text-4xl font-black leading-tight tracking-tight text-slate-800 md:text-6xl drop-shadow-sm">
+            هيا نتعلم ونمرح <br className="md:hidden" />
+            <span className="inline-block bg-gradient-to-l from-primary-600 via-primary-500 to-secondary-500 bg-clip-text pb-1 leading-relaxed text-transparent px-2">
+              في عالم الموسيقى
             </span>{' '}
-            تبدأ هنا
+            !
           </h1>
-          <p className="mx-auto mb-10 max-w-2xl text-xl leading-relaxed text-slate-600 md:text-2xl">
-            منصة تعليمية متكاملة خطوة بخطوة؛ لتعلم النوتة، الإيقاع، والعزف بأحدث الأساليب التفاعلية الممتعة.
+          <p className="mx-auto mb-10 max-w-2xl text-xl leading-relaxed text-slate-600 font-medium md:text-2xl">
+            مكانك المفضل للعب بالأصوات، اكتشاف الألحان، وتطوير مهاراتك بطريقة سهلة وممتعة خطوة بخطوة.
           </p>
 
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -204,26 +210,27 @@ const Home: FC = () => {
       {/* CTA Section */}
       <section className="py-24">
         <div className="container mx-auto px-4">
-          <div className="relative overflow-hidden rounded-[2.5rem] border border-primary-800/30 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-950 p-10 text-center shadow-[0_24px_60px_-12px_rgba(27,54,38,0.45)] md:p-16">
-            {/* Background Image Overlay */}
-            <div className="absolute inset-0 z-0">
-              <img src="/music_language.png" alt="الموسيقى لغة الجميع" className="w-full h-full object-cover opacity-40 mix-blend-overlay" />
-              <div className="absolute inset-0 bg-primary-900/40"></div>
-            </div>
+          <div className="relative overflow-hidden rounded-[3rem] border-4 border-white/80 bg-gradient-to-br from-primary-400 via-secondary-300 to-primary-500 p-10 text-center shadow-[0_24px_60px_-12px_rgba(14,165,233,0.3)] md:p-16">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent bg-[length:20px_20px]"></div>
             
             <div className="relative z-10 max-w-3xl mx-auto">
-              <Heart className="text-rose-400 mx-auto mb-6" size={48} />
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">الموسيقى لغة الجميع</h2>
-              <p className="text-xl text-primary-50 mb-10 leading-relaxed font-medium drop-shadow-md">
-                انضم إلى الآلاف من المتعلمين واستفد من مصادرنا المتجددة. سواء كنت هاوياً أو تسعى للاحتراف، مقام هي بدايتك.
+              <div className="flex justify-center gap-4 mb-6">
+                <Music className="text-white animate-bounce" size={40} style={{ animationDelay: '0s' }} />
+                <Star className="text-amber-100 animate-bounce fill-amber-100" size={48} style={{ animationDelay: '0.2s' }} />
+                <Heart className="text-rose-400 animate-bounce fill-rose-400" size={40} style={{ animationDelay: '0.4s' }} />
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black text-white mb-6 drop-shadow-md">الموسيقى لغة الجميع</h2>
+              <p className="text-xl text-white/90 mb-10 leading-relaxed font-bold drop-shadow-sm">
+                انضم إلينا واستمتع بتعلم الموسيقى والألحان. مقام هي مكانك المفضل لتبدأ رحلتك بسعادة!
               </p>
               <div className="flex justify-center gap-4">
                 <Link
                   to="/resources"
-                  className="flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-lg font-bold text-primary-900 shadow-lg transition hover:bg-primary-50 hover:shadow-xl"
+                  className="flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-lg font-black text-primary-600 shadow-xl transition-transform hover:scale-105"
                 >
                   <Library size={22} />
-                  المكتبة الموسيقية
+                  مكتبة الألحان
                 </Link>
               </div>
             </div>

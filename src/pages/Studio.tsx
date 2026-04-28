@@ -122,11 +122,15 @@ const Studio: FC = () => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className={`flex flex-col gap-4 sm:gap-6 mb-8 md:mb-10 transition-opacity ${isFocusMode ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-3">
-              <AudioLines className="text-primary-600" />
-              استوديو العزف المتقدم
+            <h1 className="text-3xl sm:text-4xl font-black text-slate-800 flex items-center gap-3 drop-shadow-sm">
+              <span className="bg-primary-100 p-2 rounded-2xl text-primary-600">
+                <AudioLines size={32} />
+              </span>
+              غرفة الألحان الممتعة
             </h1>
-            <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">تدرب على الإيقاع والأنغام، العب باستخدام كيبورد الكمبيوتر أو جهاز MIDI الخارجي.</p>
+            <p className="text-slate-600 mt-3 text-base sm:text-lg font-medium leading-relaxed">
+              هيا نعزف ونستمتع! استخدم الماوس، أو لوحة المفاتيح، أو حتى جهاز البيانو الخاص بك لتكوين أجمل الألحان.
+            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">

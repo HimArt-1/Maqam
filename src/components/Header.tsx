@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, Info, Heart, Layers, Activity, Library, MessageCircle, Phone, AudioLines } from 'lucide-react';
+import { Menu, X, Home, Info, Heart, Layers, Activity, Library, MessageCircle, Phone, AudioLines, Music, Sparkles } from 'lucide-react';
 
 const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,14 +25,15 @@ const Header: FC = () => {
           
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="bg-white rounded-xl flex items-center justify-center p-1 border border-slate-100 shadow-sm group-hover:shadow-md transition">
-              <img src="/icon.png" alt="شعار منصة مقام" className="w-12 h-12 object-contain" />
+            <div className="bg-gradient-to-tr from-primary-400 to-secondary-400 rounded-2xl flex items-center justify-center p-2.5 shadow-md group-hover:shadow-lg transition-transform group-hover:scale-105 group-active:scale-95 relative overflow-hidden">
+              <Sparkles size={14} className="text-white absolute top-1 right-1 opacity-70" />
+              <Music size={28} className="text-white" strokeWidth={2.5} />
             </div>
             <div>
-              <h1 className="text-2xl font-black bg-gradient-to-l from-primary-700 to-secondary-600 bg-clip-text text-transparent tracking-tight">
+              <h1 className="text-3xl font-black text-slate-800 tracking-tight">
                 مـقـام
               </h1>
-              <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">مبادرة تعليمية</p>
+              <p className="text-sm text-primary-600 font-bold tracking-wide">عالم الموسيقى الممتع</p>
             </div>
           </Link>
 

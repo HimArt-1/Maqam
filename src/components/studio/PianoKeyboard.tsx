@@ -192,9 +192,9 @@ const PianoKeyboard: FC<PianoKeyboardProps> = ({ activeNotes, onPlayNote, onRele
                 whileTap={{ y: 3 }}
                 animate={{
                   y: pressed ? 3 : 0,
-                  backgroundColor: pressed ? '#e1f5ea' : '#fffdf7',
+                  backgroundColor: pressed ? '#bae6fd' : '#fffdf7',
                   boxShadow: pressed
-                    ? 'inset 0 -18px 22px rgba(52,109,70,0.18), inset 0 0 0 2px rgba(70,139,93,0.35), 0 8px 18px rgba(0,0,0,0.22)'
+                    ? 'inset 0 -18px 22px rgba(56,189,248,0.18), inset 0 0 0 2px rgba(14,165,233,0.35), 0 8px 18px rgba(0,0,0,0.22)'
                     : 'inset 0 -22px 24px rgba(15,23,42,0.08), inset 0 1px 0 rgba(255,255,255,0.9), 0 10px 20px rgba(0,0,0,0.22)',
                   transformOrigin: 'top',
                 }}
@@ -241,13 +241,13 @@ const PianoKeyboard: FC<PianoKeyboardProps> = ({ activeNotes, onPlayNote, onRele
               whileTap={{ y: 4 }}
               animate={{
                 y: pressed ? 4 : 0,
-                backgroundColor: pressed ? '#346d46' : '#101827',
+                backgroundColor: pressed ? '#f59e0b' : '#1e293b',
                 boxShadow: pressed
-                  ? 'inset 0 -12px 16px rgba(255,255,255,0.08), 0 0 0 1px rgba(155,200,169,0.55), 0 14px 22px rgba(14,30,21,0.45)'
+                  ? 'inset 0 -12px 16px rgba(255,255,255,0.15), 0 0 0 1px rgba(251,191,36,0.55), 0 14px 22px rgba(146,64,14,0.45)'
                   : 'inset 0 -16px 18px rgba(255,255,255,0.06), 0 10px 18px rgba(0,0,0,0.5)',
                 transformOrigin: 'top',
               }}
-              className="absolute top-5 z-20 flex h-32 cursor-pointer flex-col items-center justify-between rounded-b-lg border-x border-b border-slate-950 bg-[#101827] px-1 pb-2 pt-2 text-center text-white outline-none transition focus-visible:ring-4 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+              className="absolute top-5 z-20 flex h-32 cursor-pointer flex-col items-center justify-between rounded-b-lg border-x border-b border-slate-900 bg-[#1e293b] px-1 pb-2 pt-2 text-center text-white outline-none transition focus-visible:ring-4 focus-visible:ring-secondary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
               style={{
                 width: BLACK_KEY_WIDTH_PX,
                 left: `${blackKeyOffsetLeft(i)}px`,

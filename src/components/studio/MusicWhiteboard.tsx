@@ -14,8 +14,8 @@ const staffLines = [20, 40, 60, 80, 100]; // Y positions percentage
 
 const MusicWhiteboard: FC<MusicWhiteboardProps> = ({ activeNotes }) => {
   return (
-    <div className="w-full max-w-4xl mx-auto bg-amber-50/80 backdrop-blur-sm rounded-[2rem] border-4 border-amber-900/10 p-8 shadow-inner overflow-hidden mb-8 h-80 relative flex items-center">
-      <div className="absolute top-4 right-6 text-amber-800/20 font-bold text-4xl select-none">
+    <div className="w-full max-w-4xl mx-auto bg-white/95 backdrop-blur-md rounded-[2.5rem] border-4 border-primary-200 p-8 shadow-[0_15px_40px_-10px_rgba(14,165,233,0.2)] overflow-hidden mb-8 h-80 relative flex items-center">
+      <div className="absolute top-4 right-6 text-primary-200 font-black text-4xl select-none">
         السبورة الموسيقية
       </div>
       
@@ -51,10 +51,10 @@ const MusicWhiteboard: FC<MusicWhiteboardProps> = ({ activeNotes }) => {
                 style={{ top: `${yPos}%`, left: `${xPos}px`, transform: 'translateY(-50%)' }}
               >
                 {needsLedger && (
-                  <div className="absolute w-12 h-[2px] bg-slate-800 z-0"></div>
+                  <div className="absolute w-12 h-[3px] bg-slate-700 z-0 rounded-full"></div>
                 )}
-                <div className="w-6 h-4 bg-primary-600 rounded-[50%] rotate-[-15deg] shadow-md border-2 border-slate-900 z-10 relative">
-                  <div className="absolute -top-3 -right-6 font-bold text-xs bg-white text-primary-600 px-1 rounded shadow-sm border border-primary-200">
+                <div className="w-6 h-5 bg-secondary-400 rounded-[50%] rotate-[-15deg] shadow-lg border-2 border-secondary-600 z-10 relative transform hover:scale-110 transition-transform">
+                  <div className="absolute -top-4 -right-8 font-black text-xs bg-white text-secondary-600 px-2 py-0.5 rounded-full shadow-md border-2 border-secondary-200">
                     {note}
                   </div>
                 </div>
