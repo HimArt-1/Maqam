@@ -39,7 +39,7 @@ const Home: FC = () => {
               <Star size={16} className="fill-amber-500 text-amber-500 drop-shadow-[0_1px_3px_rgba(245,158,11,0.5)]" />
             </span>
             <span className="text-sm sm:text-base md:text-lg font-bold text-primary-800/90 tracking-wide">
-              تطوير وتنفيذ: <span className="bg-gradient-to-l from-primary-700 to-primary-900 bg-clip-text text-transparent font-extrabold">هيثم الزهراني</span>
+              تقديم: <span className="bg-gradient-to-l from-primary-700 to-primary-900 bg-clip-text text-transparent font-extrabold">أ. بدرية بنت علي الزهراني</span>
             </span>
 
             {/* Bottom decorative line */}
