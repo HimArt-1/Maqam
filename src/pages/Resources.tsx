@@ -1,8 +1,7 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { musicTheoryData } from '../data/musicTheory';
-import { FileText, ArrowLeft, Activity } from 'lucide-react';
+import { FileText } from 'lucide-react';
 
 const defaultTabId = musicTheoryData[0]?.id ?? 'reading-notes';
 
