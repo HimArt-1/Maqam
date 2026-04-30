@@ -117,19 +117,28 @@ const Studio: FC = () => {
 
   return (
     <div
-      className={`min-h-screen py-12 transition-colors ${isFocusMode ? 'bg-white' : 'bg-transparent'}`}
+      className={`min-h-screen py-16 transition-colors relative overflow-hidden ${isFocusMode ? 'bg-white' : 'bg-gradient-to-b from-secondary-50/50 to-white'}`}
     >
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className={`flex flex-col gap-4 sm:gap-6 mb-8 md:mb-10 transition-opacity ${isFocusMode ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-black text-slate-800 flex items-center gap-3 drop-shadow-sm">
-              <span className="bg-primary-100 p-2 rounded-2xl text-primary-600">
-                <AudioLines size={32} />
+      {/* Fun Animated Background Elements */}
+      {!isFocusMode && (
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute top-10 right-[5%] w-40 h-40 bg-secondary-200/30 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute top-40 left-[10%] w-32 h-32 bg-rose-200/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-80 right-[20%] w-48 h-48 bg-purple-200/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        </div>
+      )}
+
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
+        <div className={`flex flex-col gap-6 mb-10 transition-opacity text-center items-center ${isFocusMode ? 'opacity-20 hover:opacity-100' : 'opacity-100'}`}>
+          <div className="bg-white/60 backdrop-blur-md p-8 rounded-[3rem] border-4 border-white shadow-xl w-full max-w-3xl flex flex-col items-center">
+            <h1 className="text-4xl md:text-5xl font-black text-slate-800 flex items-center justify-center gap-4 drop-shadow-sm mb-4">
+              <span className="bg-gradient-to-br from-secondary-400 to-rose-500 p-4 rounded-3xl text-white shadow-lg rotate-3">
+                <AudioLines size={40} />
               </span>
-              غرفة الألحان الممتعة
+              الاستوديو الحر
             </h1>
-            <p className="text-slate-600 mt-3 text-base sm:text-lg font-medium leading-relaxed">
-              هيا نعزف ونستمتع! استخدم الماوس، أو لوحة المفاتيح، أو حتى جهاز البيانو الخاص بك لتكوين أجمل الألحان.
+            <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed max-w-xl">
+              هيا نعزف ونستمتع! استخدم الماوس، لوحة المفاتيح، أو حتى بيانو MIDI لتأليف أجمل الألحان بحرية.
             </p>
           </div>
 

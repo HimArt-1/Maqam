@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Instagram, Youtube, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Youtube, Twitter, Music, Star } from 'lucide-react';
 
 const Footer: FC = () => {
   return (
@@ -14,12 +14,15 @@ const Footer: FC = () => {
           
           {/* Brand */}
           <div>
-            <Link to="/" className="flex items-center gap-3 mb-6 inline-block">
-              <div className="bg-white rounded-xl p-1 border border-white/20 inline-flex items-center justify-center">
-                <img src="/icon.png" alt="أيقونة المنصة" className="w-10 h-10 object-contain" />
+            <Link to="/" className="flex items-center gap-3 mb-6 inline-block group">
+              <div className="relative w-12 h-12 bg-gradient-to-tr from-amber-400 to-orange-400 rounded-xl rotate-3 flex items-center justify-center shadow-lg border-2 border-white/50 group-hover:rotate-6 transition-transform">
+                <Music size={24} className="text-white drop-shadow-md -rotate-6" strokeWidth={3} />
+                <div className="absolute -top-2 -right-2 bg-white rounded-full p-1 shadow-md border border-amber-100">
+                  <Star size={12} className="text-amber-500 fill-amber-500" />
+                </div>
               </div>
-              <h1 className="text-2xl font-bold align-middle inline-block">
-                منصة مقام
+              <h1 className="text-2xl font-black align-middle inline-block drop-shadow-sm group-hover:text-amber-400 transition-colors">
+                مقام
               </h1>
             </Link>
             <p className="text-slate-400 leading-relaxed mb-6 w-5/6">

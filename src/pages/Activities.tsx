@@ -50,25 +50,35 @@ const Activities: FC = () => {
   };
 
   return (
-    <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <div className="min-h-screen py-16 relative overflow-hidden bg-gradient-to-b from-primary-50/50 to-white">
+      {/* Fun Animated Background Elements */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-[5%] w-32 h-32 bg-primary-200/40 rounded-full blur-2xl animate-pulse" />
+        <div className="absolute top-60 right-[10%] w-40 h-40 bg-teal-200/40 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1.5s' }} />
+        <div className="absolute bottom-40 left-[20%] w-48 h-48 bg-blue-200/40 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '0.5s' }} />
+      </div>
+
+      <div className="container mx-auto px-4 max-w-5xl relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-10 md:mb-16 max-w-3xl mx-auto px-2">
-          <span className="inline-block py-1.5 px-5 rounded-full bg-secondary-100 text-secondary-800 text-sm font-bold mb-4">
-            التدريب التفاعلي 🎧
+        <div className="text-center mb-12 md:mb-20 max-w-3xl mx-auto px-2">
+          <span className="inline-block py-2 px-6 rounded-full bg-white text-primary-600 text-base font-bold mb-6 shadow-sm border border-primary-100">
+            ألعاب وتدريبات تفاعلية 🎧
           </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-slate-900 leading-tight">مسار التعلم العملي</h1>
-          <p className="text-base sm:text-xl text-slate-600 leading-relaxed">
-            منهج متدرّج في ست وحدات: شرح مبسّط في كل درس، أهداف واضحة، وروابط للمرجع النظري عند الحاجة. اختر الدرس وابدأ — المنصة تصحح خطوة بخطوة.
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 text-slate-800 leading-tight drop-shadow-sm">
+            هيا نتدرب <span className="text-transparent bg-clip-text bg-gradient-to-l from-primary-600 to-teal-400">ونمرح!</span>
+          </h1>
+          <p className="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed bg-white/50 backdrop-blur-sm py-4 px-6 rounded-3xl border border-white/80 shadow-sm inline-block">
+            اختر لعبتك ودرسك المفضل وابدأ التحدي. المنصة ستساعدك وتصحح لك خطوة بخطوة.
           </p>
         </div>
 
-        <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {curriculumUnitsMeta.map((u) => (
-            <div key={u.index} className="card-modern p-5 text-right">
-              <p className="text-xs font-bold text-primary-600">الوحدة {u.index}</p>
-              <h3 className="mt-1 font-bold text-slate-900 leading-snug">{u.title.replace(/^[^:]+:\s*/, '')}</h3>
-              <p className="mt-2 text-sm text-slate-600 leading-relaxed">{u.summary}</p>
+            <div key={u.index} className="bg-white rounded-[2rem] p-6 text-right shadow-xl border-4 border-transparent hover:border-primary-300 transition-all hover:-translate-y-2 relative overflow-hidden group">
+              <div className="absolute -right-4 -top-4 w-20 h-20 bg-primary-50 rounded-full -z-10 transition-transform group-hover:scale-150" />
+              <p className="text-sm font-black text-primary-500 mb-2">الوحدة {u.index}</p>
+              <h3 className="text-xl font-bold text-slate-800 leading-snug mb-3">{u.title.replace(/^[^:]+:\s*/, '')}</h3>
+              <p className="text-slate-500 leading-relaxed font-medium">{u.summary}</p>
             </div>
           ))}
         </div>
@@ -136,16 +146,17 @@ const Activities: FC = () => {
                   return (
                     <div
                       key={lesson.id}
-                      className={`group flex flex-col items-center gap-5 sm:gap-6 md:gap-8 rounded-2xl md:rounded-[2rem] border p-5 sm:p-6 md:p-8 lg:p-10 shadow-sm backdrop-blur-sm transition-all hover:shadow-xl ${
+                      className={`group flex flex-col items-center gap-5 sm:gap-6 md:gap-8 rounded-[2.5rem] border-4 p-5 sm:p-6 md:p-8 lg:p-10 shadow-lg backdrop-blur-sm transition-all hover:shadow-2xl ${
                         isDone
-                          ? 'border-emerald-200/80 bg-white/85'
-                          : 'border-white/70 bg-white/75 hover:border-primary-200/60'
-                      } md:flex-row`}
+                          ? 'border-emerald-100 bg-white hover:border-emerald-300'
+                          : 'border-white bg-white/80 hover:border-primary-300 hover:-translate-y-1'
+                      } md:flex-row relative overflow-hidden`}
                     >
+                      {isDone && <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -z-10" />}
                       <div
-                        className={`w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-2xl flex items-center justify-center font-bold text-2xl sm:text-3xl shadow-inner border ${isDone ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-primary-50 text-primary-600 border-primary-100'}`}
+                        className={`w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-[2rem] flex items-center justify-center font-black text-3xl sm:text-4xl shadow-inner border-4 rotate-3 group-hover:rotate-6 transition-transform ${isDone ? 'bg-emerald-400 text-white border-emerald-200' : 'bg-primary-400 text-white border-primary-200'}`}
                       >
-                        {isDone ? <CheckCircle2 size={32} strokeWidth={2.25} className="sm:w-10 sm:h-10" /> : idx}
+                        {isDone ? <CheckCircle2 size={40} strokeWidth={3} /> : idx}
                       </div>
 
                       <div className="flex-1 text-center md:text-right">
@@ -173,13 +184,13 @@ const Activities: FC = () => {
                       <div className="w-full md:w-auto shrink-0">
                         <Link
                           to={`/lesson/${lesson.id}`}
-                          className={`w-full md:w-auto flex items-center justify-center gap-3 font-extrabold py-4 sm:py-5 px-6 sm:px-8 rounded-xl md:rounded-2xl transition-all shadow-lg text-base sm:text-lg ${
+                          className={`w-full md:w-auto flex items-center justify-center gap-3 font-black py-4 sm:py-5 px-6 sm:px-8 rounded-2xl transition-all shadow-md text-base sm:text-lg ${
                             isDone 
-                              ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 shadow-slate-200/50 border border-slate-200'
-                              : 'bg-gradient-to-l from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white shadow-primary-600/30 hover:-translate-y-0.5 hover:shadow-xl'
+                              ? 'bg-emerald-100 hover:bg-emerald-200 text-emerald-800'
+                              : 'bg-primary-500 hover:bg-primary-600 text-white shadow-primary-500/40 hover:-translate-y-1 hover:shadow-lg'
                           }`}
                         >
-                          {isDone ? 'إعادة الدرس' : 'بدء الدرس'} <ArrowLeft size={20} />
+                          {isDone ? 'إعادة اللعب' : 'ابدأ اللعب'} <ArrowLeft size={24} strokeWidth={3} />
                         </Link>
                       </div>
                     </div>
