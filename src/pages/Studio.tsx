@@ -117,7 +117,7 @@ const Studio: FC = () => {
 
   return (
     <div
-      className={`min-h-screen py-16 transition-colors relative overflow-hidden ${isFocusMode ? 'bg-white' : 'bg-gradient-to-b from-secondary-50/50 to-white'}`}
+      className={`studio-page min-h-screen min-h-[100dvh] scroll-mt-[5.5rem] py-8 sm:py-16 transition-colors relative overflow-hidden pb-[max(1.5rem,env(safe-area-inset-bottom))] ${isFocusMode ? 'bg-white' : 'bg-gradient-to-b from-secondary-50/50 to-white'}`}
     >
       {/* Fun Animated Background Elements */}
       {!isFocusMode && (

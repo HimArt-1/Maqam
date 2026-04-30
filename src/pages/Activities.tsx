@@ -50,7 +50,7 @@ const Activities: FC = () => {
   };
 
   return (
-    <div className="min-h-screen py-16 relative overflow-hidden bg-gradient-to-b from-primary-50/50 to-white">
+    <div className="activities-page min-h-screen min-h-[100dvh] scroll-mt-[5.5rem] py-8 sm:py-12 md:py-16 relative overflow-hidden bg-gradient-to-b from-primary-50/50 to-white pb-[max(2rem,env(safe-area-inset-bottom))]">
       {/* Fun Animated Background Elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-[5%] w-32 h-32 bg-primary-200/40 rounded-full blur-2xl animate-pulse" />
@@ -58,7 +58,7 @@ const Activities: FC = () => {
         <div className="absolute bottom-40 left-[20%] w-48 h-48 bg-blue-200/40 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '0.5s' }} />
       </div>
 
-      <div className="container mx-auto px-4 max-w-5xl relative z-10">
+      <div className="container mx-auto w-full px-3 sm:px-4 max-w-5xl relative z-10">
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-20 max-w-3xl mx-auto px-2">
           <span className="inline-block py-2 px-6 rounded-full bg-white text-primary-600 text-base font-bold mb-6 shadow-sm border border-primary-100">

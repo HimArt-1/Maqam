@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { PlayCircle, Star, Music, Heart, Sparkles, Smile, Gamepad2 } from 'lucide-react';
+import { PlayCircle, Star, Heart, Sparkles, Smile, Gamepad2 } from 'lucide-react';
+import { MAQAM_LOGO_SRC } from '../constants/brand';
 
 const Home: FC = () => {
   return (
-    <div className="overflow-hidden bg-gradient-to-b from-blue-50/50 to-white min-h-screen relative">
+    <div className="overflow-hidden bg-gradient-to-b from-emerald-50/40 via-white to-sky-50/30 min-h-screen min-h-[100dvh] relative">
       
       {/* Fun Animated Background Elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -15,21 +16,28 @@ const Home: FC = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative px-4 pt-12 pb-10 md:pt-20 md:pb-16 container mx-auto text-center z-10">
+      <section className="relative px-3 sm:px-4 pt-8 pb-8 md:pt-16 md:pb-14 container mx-auto text-center z-10 max-w-[100vw]">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ type: "spring", bounce: 0.6, duration: 1 }}
-          className="inline-block mb-6"
+          initial={{ opacity: 0, scale: 0.92, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: "spring", bounce: 0.35, duration: 0.9 }}
+          className="inline-block mb-5 sm:mb-6"
         >
-          <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto bg-gradient-to-tr from-amber-400 to-orange-400 rounded-[2.5rem] rotate-3 flex items-center justify-center shadow-[0_20px_50px_-12px_rgba(245,158,11,0.5)] border-4 border-white">
-            <Music size={70} className="text-white drop-shadow-md -rotate-6" strokeWidth={3} />
+          <div className="relative mx-auto w-[min(88vw,280px)] sm:w-72 md:w-80">
+            <div className="rounded-[1.75rem] overflow-hidden ring-4 ring-white shadow-[0_24px_60px_-20px_rgba(22,101,52,0.35)] bg-neutral-950">
+              <img
+                src={MAQAM_LOGO_SRC}
+                alt="شعار أكاديمية مقام الموسيقية — منصة مقام التعليمية"
+                className="w-full h-auto object-contain"
+                decoding="async"
+              />
+            </div>
             <motion.div 
-              animate={{ y: [0, -10, 0] }} 
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="absolute -top-4 -right-4 bg-white rounded-full p-2.5 shadow-xl border-2 border-amber-100"
+              animate={{ y: [0, -8, 0] }} 
+              transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+              className="absolute -top-2 -right-1 sm:-right-2 bg-white rounded-full p-2 shadow-xl border border-emerald-100"
             >
-              <Star size={28} className="text-amber-500 fill-amber-500" />
+              <Star size={22} className="text-amber-500 fill-amber-500 sm:w-7 sm:h-7" />
             </motion.div>
           </div>
         </motion.div>
@@ -37,25 +45,25 @@ const Home: FC = () => {
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-4xl md:text-6xl font-black text-slate-800 mb-6 drop-shadow-sm leading-tight"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="text-2xl leading-snug sm:text-3xl md:text-5xl md:leading-tight font-black text-slate-800 mb-4 sm:mb-6 drop-shadow-sm px-1"
         >
-          أهلاً بك في <span className="text-transparent bg-clip-text bg-gradient-to-l from-primary-600 to-teal-400">عالم الموسيقى!</span>
+          أهلاً بك في <span className="text-transparent bg-clip-text bg-gradient-to-l from-emerald-700 via-primary-600 to-teal-500">أكاديمية مقام الموسيقية</span>
         </motion.h1>
         
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-xl md:text-2xl text-slate-600 font-bold max-w-2xl mx-auto mb-10 bg-white/50 backdrop-blur-sm py-3 px-6 rounded-full inline-block border border-white/80 shadow-sm"
+          transition={{ duration: 0.6, delay: 0.22 }}
+          className="text-base sm:text-lg md:text-2xl text-slate-600 font-bold max-w-2xl mx-auto mb-8 sm:mb-10 bg-white/60 backdrop-blur-sm py-3 px-4 sm:px-6 rounded-2xl sm:rounded-full inline-block border border-white/80 shadow-sm leading-relaxed"
         >
-          هيا نلعب، نتعلم، ونعزف أجمل الألحان معاً 🎵
+          منصة تعليمية سعودية — نلعب، نتعلم، ونعزف معاً
         </motion.p>
       </section>
 
       {/* Main Activities/Lessons - BIG AND COLORFUL */}
-      <section className="relative z-20 pb-24 px-4 container mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="relative z-20 pb-16 sm:pb-24 px-3 sm:px-4 container mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
           
           {/* Card 1: Lessons */}
           <motion.div 
@@ -125,9 +133,9 @@ const Home: FC = () => {
 
       {/* Decorative Bottom */}
       <div className="flex justify-center items-center gap-8 pb-16">
-         <motion.div animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 2, delay: 0 }}><Star size={36} className="text-amber-400 fill-amber-400 opacity-60 drop-shadow-sm" /></motion.div>
-         <motion.div animate={{ y: [0, -18, 0] }} transition={{ repeat: Infinity, duration: 2.5, delay: 0.2 }}><Heart size={36} className="text-rose-400 fill-rose-400 opacity-60 drop-shadow-sm" /></motion.div>
-         <motion.div animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 2.2, delay: 0.4 }}><Music size={36} className="text-primary-400 opacity-60 drop-shadow-sm" /></motion.div>
+         <motion.div animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 2, delay: 0 }}><Star size={32} className="text-amber-400 fill-amber-400 opacity-60 drop-shadow-sm sm:w-9 sm:h-9" /></motion.div>
+         <motion.div animate={{ y: [0, -18, 0] }} transition={{ repeat: Infinity, duration: 2.5, delay: 0.2 }}><Heart size={32} className="text-rose-400 fill-rose-400 opacity-60 drop-shadow-sm sm:w-9 sm:h-9" /></motion.div>
+         <motion.span animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 2.2, delay: 0.4 }} className="inline-block text-primary-500 opacity-70 text-3xl sm:text-4xl" aria-hidden>♪</motion.span>
       </div>
     </div>
   );

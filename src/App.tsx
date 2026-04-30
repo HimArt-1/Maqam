@@ -13,15 +13,19 @@ import Resources from './pages/Resources';
 import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import AccessibilityPanel from './components/AccessibilityPanel';
+import ScrollToTop from './components/ScrollToTop';
+import PlatformIntro from './components/PlatformIntro';
 import { AccessibilityProvider } from './context/AccessibilityContext';
 
 const App: FC = () => {
   return (
     <AccessibilityProvider>
       <Router>
+        <ScrollToTop />
+        <PlatformIntro />
         <div className="flex min-h-screen flex-col bg-app font-sans text-slate-800 transition-colors" dir="rtl">
           <Header />
-        <main className="flex-grow">
+        <main className="flex-grow flex flex-col min-h-0 w-full overflow-x-hidden">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

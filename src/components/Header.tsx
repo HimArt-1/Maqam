@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Home, Info, Heart, Layers, Activity, Library, MessageCircle, Phone, AudioLines, Music, Sparkles } from 'lucide-react';
+import { Menu, X, Home, Info, Heart, Layers, Activity, Library, MessageCircle, Phone, AudioLines } from 'lucide-react';
+import { MAQAM_LOGO_SRC } from '../constants/brand';
 
 const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,21 +20,27 @@ const Header: FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/50 bg-white/70 shadow-[0_8px_32px_-12px_rgba(27,54,38,0.08)] backdrop-blur-xl transition-all duration-300">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-20">
+    <header className="sticky top-0 z-50 border-b border-white/50 bg-white/80 shadow-[0_8px_32px_-12px_rgba(27,54,38,0.08)] backdrop-blur-xl transition-all duration-300 supports-[padding:max(0px)]:pt-[env(safe-area-inset-top)]">
+      <div className="container mx-auto max-w-[100vw] px-3 sm:px-4">
+        <div className="flex justify-between items-center min-h-[4.25rem] sm:h-20 py-2 sm:py-0 gap-2">
           
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="bg-gradient-to-tr from-primary-400 to-secondary-400 rounded-2xl flex items-center justify-center p-2.5 shadow-md group-hover:shadow-lg transition-transform group-hover:scale-105 group-active:scale-95 relative overflow-hidden">
-              <Sparkles size={14} className="text-white absolute top-1 right-1 opacity-70" />
-              <Music size={28} className="text-white" strokeWidth={2.5} />
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink">
+            <div className="relative shrink-0 rounded-xl overflow-hidden ring-1 ring-slate-200/80 shadow-md group-hover:shadow-lg transition-transform group-hover:scale-[1.02] group-active:scale-[0.98] bg-neutral-950">
+              <img
+                src={MAQAM_LOGO_SRC}
+                alt="مقام — أكاديمية الموسيقى"
+                className="h-11 w-11 sm:h-14 sm:w-14 object-cover object-center"
+                width={56}
+                height={56}
+                decoding="async"
+              />
             </div>
-            <div>
-              <h1 className="text-3xl font-black text-slate-800 tracking-tight">
-                مـقـام
+            <div className="min-w-0 text-right">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-800 tracking-tight truncate">
+                مقام
               </h1>
-              <p className="text-sm text-primary-600 font-bold tracking-wide">عالم الموسيقى الممتع</p>
+              <p className="text-[11px] sm:text-sm text-primary-700 font-bold tracking-wide leading-tight line-clamp-2">منصة مقام الموسيقية التعليمية</p>
             </div>
           </Link>
 
