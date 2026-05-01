@@ -1,107 +1,142 @@
 import { FC, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, Home, Info, Heart, Layers, Activity, Library, MessageCircle, Phone, AudioLines } from 'lucide-react';
-import { MAQAM_LOGO_SRC } from '../constants/brand';
+import { MAQAM_ICON_SRC } from '../constants/brand';
 
 const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
-    { name: 'الرئيسية', path: '/', icon: Home },
-    { name: 'من نحن', path: '/about', icon: Info },
-    { name: 'فوائد الموسيقى', path: '/benefits', icon: Heart },
-    { name: 'هيكل التعلم', path: '/program-structure', icon: Layers },
-    { name: 'الأنشطة والتدريبات', path: '/activities', icon: Activity },
-    { name: 'استوديو العزف', path: '/studio', icon: AudioLines },
-    { name: 'المصادر', path: '/resources', icon: Library },
-    { name: 'الأسئلة الشائعة', path: '/faq', icon: MessageCircle },
-    { name: 'اتصل بنا', path: '/contact', icon: Phone },
+    { name: 'الرئيسية',          path: '/',                 icon: Home },
+    { name: 'من نحن',            path: '/about',            icon: Info },
+    { name: 'فوائد الموسيقى',   path: '/benefits',         icon: Heart },
+    { name: 'هيكل التعلم',      path: '/program-structure', icon: Layers },
+    { name: 'الأنشطة',          path: '/activities',       icon: Activity },
+    { name: 'استوديو العزف',    path: '/studio',           icon: AudioLines },
+    { name: 'المصادر',          path: '/resources',        icon: Library },
+    { name: 'الأسئلة الشائعة', path: '/faq',              icon: MessageCircle },
+    { name: 'اتصل بنا',        path: '/contact',          icon: Phone },
   ];
 
+  const isActive = (path: string) => location.pathname === path;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/50 bg-white/80 shadow-[0_8px_32px_-12px_rgba(27,54,38,0.08)] backdrop-blur-xl transition-all duration-300 supports-[padding:max(0px)]:pt-[env(safe-area-inset-top)]">
+    <header className="sticky top-0 z-50 border-b border-white/50 bg-white/85 shadow-[0_4px_24px_-8px_rgba(15,23,42,0.1)] backdrop-blur-xl transition-all duration-300 supports-[padding:max(0px)]:pt-[env(safe-area-inset-top)]">
       <div className="container mx-auto max-w-[100vw] px-3 sm:px-4">
         <div className="flex justify-between items-center min-h-[4.25rem] sm:h-20 py-2 sm:py-0 gap-2">
-          
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink">
-            <div className="relative shrink-0 rounded-xl overflow-hidden ring-1 ring-slate-200/80 shadow-md group-hover:shadow-lg transition-transform group-hover:scale-[1.02] group-active:scale-[0.98] bg-neutral-950">
+
+          {/* ——— الشعار ——— */}
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group min-w-0 shrink" onClick={() => setIsMenuOpen(false)}>
+            {/* أيقونة الشعار في دائرة داكنة */}
+            <div className="relative shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-slate-950 ring-1 ring-white/10 shadow-md group-hover:ring-emerald-500/30 transition-all duration-300">
               <img
-                src={MAQAM_LOGO_SRC}
-                alt="مقام — أكاديمية الموسيقى"
-                className="h-11 w-11 sm:h-14 sm:w-14 object-cover object-center"
-                width={56}
-                height={56}
+                src={MAQAM_ICON_SRC}
+                alt="مقام"
+                className="h-full w-full object-contain scale-[0.88]"
+                width={48}
+                height={48}
                 decoding="async"
               />
             </div>
             <div className="min-w-0 text-right">
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-800 tracking-tight truncate">
-                مقام
-              </h1>
-              <p className="text-[11px] sm:text-sm text-primary-700 font-bold tracking-wide leading-tight line-clamp-2">منصة مقام الموسيقية التعليمية</p>
+              <p className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight leading-none">مقام</p>
+              <p className="text-[11px] sm:text-xs text-primary-600 font-bold tracking-wide leading-tight mt-0.5">منصة مقام الموسيقية التعليمية</p>
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* ——— ناف سطح المكتب ——— */}
+          <nav className="hidden lg:flex items-center gap-0.5" aria-label="التنقل الرئيسي">
             {navLinks.map((link) => {
               const Icon = link.icon;
-              const isActive = location.pathname === link.path;
+              const active = isActive(link.path);
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    isActive 
-                    ? 'bg-primary-50 text-primary-700' 
-                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                  className={`relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                    active
+                      ? 'text-primary-700 bg-primary-50'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                   }`}
                 >
-                  <Icon size={16} className={isActive ? "text-primary-600" : "text-gray-400"} />
+                  <Icon size={15} className={active ? 'text-primary-500' : 'text-slate-400'} />
                   {link.name}
+                  {active && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className="absolute inset-0 rounded-lg bg-primary-50 -z-10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </Link>
-              )
+              );
             })}
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="lg:hidden p-2 rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200 transition"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          {/* ——— زر القائمة الجوال ——— */}
+          <button
+            className="lg:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100 transition active:scale-95"
+            onClick={() => setIsMenuOpen((v) => !v)}
+            aria-label={isMenuOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
+            aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={isMenuOpen ? 'close' : 'open'}
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.div>
+            </AnimatePresence>
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full">
-          <nav className="flex flex-col px-4 py-4 gap-2">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              const isActive = location.pathname === link.path;
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-md font-medium transition-all ${
-                    isActive 
-                    ? 'bg-primary-50 text-primary-700 border-r-4 border-primary-500' 
-                    : 'text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
-                  <Icon size={20} className={isActive ? "text-primary-500" : "text-gray-400"} />
-                  {link.name}
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
-      )}
+      {/* ——— قائمة الجوال المتحركة ——— */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden absolute w-full bg-white/95 backdrop-blur-xl border-t border-slate-100 shadow-xl overflow-hidden"
+          >
+            <nav className="flex flex-col px-3 py-3 gap-1" aria-label="القائمة الجوال">
+              {navLinks.map((link, i) => {
+                const Icon = link.icon;
+                const active = isActive(link.path);
+                return (
+                  <motion.div
+                    key={link.path}
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.03, duration: 0.2 }}
+                  >
+                    <Link
+                      to={link.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+                        active
+                          ? 'bg-primary-50 text-primary-700 border-r-4 border-primary-500'
+                          : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                      }`}
+                    >
+                      <Icon size={19} className={active ? 'text-primary-500' : 'text-slate-400'} />
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

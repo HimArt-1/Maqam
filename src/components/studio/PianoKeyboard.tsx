@@ -8,15 +8,13 @@ export type PianoKeyData = {
   solfege: string;
 };
 
-/** يطابق عرضًا ثابتًا للمفاتيح حتى لا يتأثر تخطيط البيانو باتجاه الصفحة RTL. */
-const WHITE_KEY_BODY_PX = 56;
+const WHITE_KEY_BODY_PX = 58;
 const WHITE_KEY_GAP_PX = 2;
-/** المسافة بين مراكز مفتاحين أبيض متجاورين */
 export const WHITE_KEY_STEP_PX = WHITE_KEY_BODY_PX + WHITE_KEY_GAP_PX;
-const BLACK_KEY_WIDTH_PX = 34;
+const BLACK_KEY_WIDTH_PX = 36;
 const BLACK_KEY_HALF = BLACK_KEY_WIDTH_PX / 2;
 
-// أوكتافان: C4–B5 (دو الوسط حتى سي الأعلى في النطاق) — متوافق مع MIDI و Tone.js
+// أوكتافان: C4–B5
 const keys: PianoKeyData[] = [
   { note: 'C4', isBlack: false, keyboardKey: 'A', solfege: 'دو' },
   { note: 'C#4', isBlack: true, keyboardKey: 'W', solfege: 'دو#' },
@@ -30,7 +28,6 @@ const keys: PianoKeyData[] = [
   { note: 'A4', isBlack: false, keyboardKey: 'H', solfege: 'لا' },
   { note: 'A#4', isBlack: true, keyboardKey: 'U', solfege: 'لا#' },
   { note: 'B4', isBlack: false, keyboardKey: 'J', solfege: 'سي' },
-
   { note: 'C5', isBlack: false, keyboardKey: 'K', solfege: 'دو' },
   { note: 'C#5', isBlack: true, keyboardKey: 'O', solfege: 'دو#' },
   { note: 'D5', isBlack: false, keyboardKey: 'L', solfege: 'ري' },
@@ -53,7 +50,6 @@ const keysByComputerKey = new Map(keys.filter((k) => k.keyboardKey).map((k) => [
 
 function blackKeyOffsetLeft(keyIndex: number): number {
   const whiteKeysBefore = keys.slice(0, keyIndex).filter((k) => !k.isBlack).length;
-  /** المفتاح الأسود يتمركز فوق الفاصل بين المفتاحين الأبيضين السابق واللاحق. */
   const centerX = whiteKeysBefore * WHITE_KEY_STEP_PX - WHITE_KEY_GAP_PX / 2;
   return centerX - BLACK_KEY_HALF;
 }
@@ -62,9 +58,11 @@ interface PianoKeyboardProps {
   activeNotes: string[];
   onPlayNote: (note: string) => void;
   onReleaseNote: (note: string) => void;
+  /** النغمة المستهدفة في الدرس الحالي — تُضيء بتوهج أخضر */
+  targetNote?: string;
 }
 
-const PianoKeyboard: FC<PianoKeyboardProps> = ({ activeNotes, onPlayNote, onReleaseNote }) => {
+const PianoKeyboard: FC<PianoKeyboardProps> = ({ activeNotes, onPlayNote, onReleaseNote, targetNote }) => {
   const [pointerDown, setPointerDown] = useState<Set<string>>(() => new Set());
   const pointerDownRef = useRef<Set<string>>(new Set());
   const pcKeyboardDownRef = useRef<Set<string>>(new Set());
@@ -100,7 +98,7 @@ const PianoKeyboard: FC<PianoKeyboardProps> = ({ activeNotes, onPlayNote, onRele
     const normKey = (e: KeyboardEvent) => {
       const k = e.key;
       if (k === ';' || k === '؛') return ';';
-      if (k === "'" || k === '’' || k === '‘') return "'";
+      if (k === "'" || k === '‘' || k === '’') return "'";
       if (k === ']' || k === '٤') return ']';
       return k.length === 1 ? k.toUpperCase() : k;
     };
@@ -150,15 +148,24 @@ const PianoKeyboard: FC<PianoKeyboardProps> = ({ activeNotes, onPlayNote, onRele
 
   return (
     <div
-      className="relative overflow-x-auto rounded-[1.75rem] border border-slate-800 bg-slate-950 p-4 shadow-2xl shadow-slate-950/30 sm:p-6"
+      className="relative overflow-x-auto rounded-[1.75rem] border border-slate-800 bg-slate-950 p-4 shadow-2xl shadow-slate-950/40 sm:p-6"
       dir="ltr"
       role="group"
       aria-label="لوحة مفاتيح بيانو مرتبة من C4 يسارًا إلى B5 يمينًا"
     >
+      {/* تلميح لوحة المفاتيح */}
+      {targetNote && (
+        <div className="mb-3 flex items-center justify-center gap-2 text-xs text-slate-400 font-medium" dir="rtl">
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>المفتاح الأخضر هو النغمة المطلوبة</span>
+        </div>
+      )}
+
       <div
         className="relative mx-auto select-none touch-none rounded-t-2xl border-t border-slate-700 bg-gradient-to-b from-slate-800 to-slate-950 px-0 pt-5"
         style={{ width: PIANO_WIDTH_PX }}
       >
+        {/* المفاتيح البيضاء */}
         <div
           className="grid"
           style={{
@@ -169,95 +176,142 @@ const PianoKeyboard: FC<PianoKeyboardProps> = ({ activeNotes, onPlayNote, onRele
           {keys.map((keyObj) => {
             if (keyObj.isBlack) return null;
             const pressed = isLit(keyObj.note);
+            const isTarget = keyObj.note === targetNote;
             return (
               <motion.button
                 key={keyObj.note}
                 type="button"
                 onPointerDown={(e) => {
                   e.preventDefault();
-                  try {
-                    e.currentTarget.setPointerCapture(e.pointerId);
-                  } catch {
-                    /* بعض المتصفحات/الأجهزة لا تدعم */
-                  }
+                  try { e.currentTarget.setPointerCapture(e.pointerId); } catch { /* */ }
                   pressPointer(keyObj.note);
                 }}
-                onPointerUp={(e) => {
-                  e.preventDefault();
-                  releasePointer(keyObj.note);
-                }}
+                onPointerUp={(e) => { e.preventDefault(); releasePointer(keyObj.note); }}
                 onPointerCancel={() => releasePointer(keyObj.note)}
                 onLostPointerCapture={() => releasePointer(keyObj.note)}
                 whileHover={{ y: -1 }}
                 whileTap={{ y: 3 }}
                 animate={{
                   y: pressed ? 3 : 0,
-                  backgroundColor: pressed ? '#bae6fd' : '#fffdf7',
+                  backgroundColor: pressed
+                    ? '#bae6fd'
+                    : isTarget
+                      ? '#ecfdf5'
+                      : '#fffdf7',
                   boxShadow: pressed
-                    ? 'inset 0 -18px 22px rgba(56,189,248,0.18), inset 0 0 0 2px rgba(14,165,233,0.35), 0 8px 18px rgba(0,0,0,0.22)'
-                    : 'inset 0 -22px 24px rgba(15,23,42,0.08), inset 0 1px 0 rgba(255,255,255,0.9), 0 10px 20px rgba(0,0,0,0.22)',
+                    ? 'inset 0 -18px 22px rgba(56,189,248,0.22), inset 0 0 0 2px rgba(14,165,233,0.4), 0 8px 18px rgba(0,0,0,0.25)'
+                    : isTarget
+                      ? 'inset 0 -22px 24px rgba(16,185,129,0.12), inset 0 1px 0 rgba(255,255,255,0.95), 0 0 0 2px rgba(16,185,129,0.5), 0 10px 22px rgba(0,0,0,0.22)'
+                      : 'inset 0 -22px 24px rgba(15,23,42,0.08), inset 0 1px 0 rgba(255,255,255,0.9), 0 10px 20px rgba(0,0,0,0.22)',
                   transformOrigin: 'top',
                 }}
-                className="relative z-0 flex h-52 cursor-pointer flex-col items-center justify-end overflow-hidden rounded-b-xl border border-slate-300 bg-[#fffdf7] px-1 pb-3 text-center outline-none transition focus-visible:ring-4 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                transition={{ type: 'spring', stiffness: 600, damping: 30 }}
+                className="relative z-0 flex h-52 cursor-pointer flex-col items-center justify-end overflow-hidden rounded-b-xl border border-slate-300 px-1 pb-3 text-center outline-none focus-visible:ring-4 focus-visible:ring-primary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                 aria-label={`${keyObj.solfege} ${keyObj.note}`}
               >
+                {/* هالة التوهج للمفتاح المستهدف */}
+                {isTarget && !pressed && (
+                  <motion.div
+                    className="pointer-events-none absolute inset-0 rounded-b-xl z-[1]"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ repeat: Infinity, duration: 1.15, ease: 'easeInOut' }}
+                    style={{
+                      background: 'linear-gradient(to bottom, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.18) 100%)',
+                      boxShadow: 'inset 0 0 0 2.5px rgba(16,185,129,0.7)',
+                    }}
+                  />
+                )}
+
                 {keyObj.keyboardKey && (
-                  <span className="absolute top-3 rounded-md bg-slate-100 px-1.5 py-0.5 font-mono text-[10px] font-bold text-slate-500 ring-1 ring-slate-200">
+                  <span className={`absolute top-3 rounded-md px-1.5 py-0.5 font-mono text-[10px] font-bold ring-1 z-10 ${
+                    isTarget
+                      ? 'bg-emerald-100 text-emerald-700 ring-emerald-300'
+                      : 'bg-slate-100 text-slate-500 ring-slate-200'
+                  }`}>
                     {keyObj.keyboardKey}
                   </span>
                 )}
-                <span className="text-base font-extrabold text-slate-800" dir="rtl">
+
+                {/* علامة النغمة المستهدفة */}
+                {isTarget && (
+                  <motion.div
+                    className="absolute bottom-14 text-emerald-600 z-10 font-black text-base"
+                    animate={{ y: [0, -3, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.2, ease: 'easeInOut' }}
+                  >
+                    ▼
+                  </motion.div>
+                )}
+
+                <span className={`relative z-10 text-base font-extrabold ${isTarget ? 'text-emerald-700' : 'text-slate-800'}`} dir="rtl">
                   {keyObj.solfege}
                 </span>
-                <span className="mt-1 font-mono text-[11px] font-bold text-slate-500">{keyObj.note}</span>
+                <span className={`mt-1 font-mono text-[11px] font-bold z-10 ${isTarget ? 'text-emerald-600' : 'text-slate-500'}`}>
+                  {keyObj.note}
+                </span>
               </motion.button>
             );
           })}
         </div>
 
+        {/* المفاتيح السوداء */}
         {keys.map((keyObj, i) => {
           if (!keyObj.isBlack) return null;
           const pressed = isLit(keyObj.note);
+          const isTarget = keyObj.note === targetNote;
           return (
             <motion.button
               key={keyObj.note}
               type="button"
               onPointerDown={(e) => {
                 e.preventDefault();
-                try {
-                  e.currentTarget.setPointerCapture(e.pointerId);
-                } catch {
-                  /* */
-                }
+                try { e.currentTarget.setPointerCapture(e.pointerId); } catch { /* */ }
                 pressPointer(keyObj.note);
               }}
-              onPointerUp={(e) => {
-                e.preventDefault();
-                releasePointer(keyObj.note);
-              }}
+              onPointerUp={(e) => { e.preventDefault(); releasePointer(keyObj.note); }}
               onPointerCancel={() => releasePointer(keyObj.note)}
               onLostPointerCapture={() => releasePointer(keyObj.note)}
               whileHover={{ y: -1 }}
               whileTap={{ y: 4 }}
               animate={{
                 y: pressed ? 4 : 0,
-                backgroundColor: pressed ? '#f59e0b' : '#1e293b',
+                backgroundColor: pressed
+                  ? '#f59e0b'
+                  : isTarget
+                    ? '#064e3b'
+                    : '#1e293b',
                 boxShadow: pressed
                   ? 'inset 0 -12px 16px rgba(255,255,255,0.15), 0 0 0 1px rgba(251,191,36,0.55), 0 14px 22px rgba(146,64,14,0.45)'
-                  : 'inset 0 -16px 18px rgba(255,255,255,0.06), 0 10px 18px rgba(0,0,0,0.5)',
+                  : isTarget
+                    ? 'inset 0 -16px 18px rgba(255,255,255,0.08), 0 0 0 2px rgba(16,185,129,0.7), 0 0 16px rgba(16,185,129,0.4), 0 10px 18px rgba(0,0,0,0.5)'
+                    : 'inset 0 -16px 18px rgba(255,255,255,0.06), 0 10px 18px rgba(0,0,0,0.5)',
                 transformOrigin: 'top',
               }}
-              className="absolute top-5 z-20 flex h-32 cursor-pointer flex-col items-center justify-between rounded-b-lg border-x border-b border-slate-900 bg-[#1e293b] px-1 pb-2 pt-2 text-center text-white outline-none transition focus-visible:ring-4 focus-visible:ring-secondary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+              transition={{ type: 'spring', stiffness: 600, damping: 30 }}
+              className="absolute top-5 z-20 flex h-32 cursor-pointer flex-col items-center justify-between rounded-b-lg border-x border-b border-slate-900 px-1 pb-2 pt-2 text-center text-white outline-none focus-visible:ring-4 focus-visible:ring-secondary-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 overflow-hidden"
               style={{
                 width: BLACK_KEY_WIDTH_PX,
                 left: `${blackKeyOffsetLeft(i)}px`,
               }}
               aria-label={`${keyObj.solfege} ${keyObj.note}`}
             >
-              {keyObj.keyboardKey && (
-                <span className="font-mono text-[10px] font-bold text-white/45">{keyObj.keyboardKey}</span>
+              {/* هالة التوهج للمفتاح الأسود المستهدف */}
+              {isTarget && !pressed && (
+                <motion.div
+                  className="pointer-events-none absolute inset-0 rounded-b-lg"
+                  animate={{ opacity: [0.4, 0.9, 0.4] }}
+                  transition={{ repeat: Infinity, duration: 1.15, ease: 'easeInOut' }}
+                  style={{ background: 'rgba(16,185,129,0.22)' }}
+                />
               )}
-              <span className="font-mono text-[10px] font-bold text-white/70">{keyObj.note}</span>
+              {keyObj.keyboardKey && (
+                <span className={`relative z-10 font-mono text-[10px] font-bold ${isTarget ? 'text-emerald-300' : 'text-white/45'}`}>
+                  {keyObj.keyboardKey}
+                </span>
+              )}
+              <span className={`relative z-10 font-mono text-[10px] font-bold ${isTarget ? 'text-emerald-300' : 'text-white/70'}`}>
+                {keyObj.note}
+              </span>
             </motion.button>
           );
         })}
